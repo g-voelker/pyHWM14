@@ -59,6 +59,43 @@ module hwm
 
 end module hwm
 
+subroutine hwm14range(iyd, sec, altlim, numalts, latlim, numlats, lonlim, numlons, stl, f107a, f107, ap, wind)
+
+    use hwm
+    implicit none
+    ! i/o vars
+    integer(4), intent(in)  :: iyd
+    integer(4), intent(in)  :: numalts, numlats, numlons
+    real(4), intent(in)     :: sec,stl,f107a,f107
+    real(4), intent(in)     :: altlim(2), latlim(2), lonlim(2)
+    real(4), intent(in)     :: ap(2)
+    real(4), intent(out)    :: wind(1:2,1:numlons,1:numlats,1:numalts)
+    
+    ! local vars
+    real(4)                 :: alt, glat, glon, dalt, dlat, dlon
+    integer(4)              :: nalt, nlat, nlon
+
+    dlon = (lonlim(2) - lonlim(1)) / (numlons - 1)
+    dlat = (latlim(2) - latlim(1)) / (numlats - 1)
+    dalt = (altlim(2) - altlim(1)) / (numalts - 1)
+
+    do nalt = 1, numalts
+        alt = altlim(1) + dalt * (nalt - 1)
+        do nlat = 1, numlats
+            glat = latlim(1) + dlat * (nlat - 1)
+            do nlon = 0, numlons
+                glon = lonlim(1) + dlon * (nlon - 1)
+
+                call hwm14(iyd,sec,alt,glat,glon,stl,f107a,f107,ap,wind(1:2,nlon,nlat,nalt))
+
+            end do
+        end do
+    end do
+
+    return
+
+end subroutine hwm14range
+
 subroutine hwm14(iyd,sec,alt,glat,glon,stl,f107a,f107,ap,w)
 
     use hwm

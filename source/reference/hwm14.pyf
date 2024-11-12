@@ -21,6 +21,15 @@ python module hwm14 ! in
             integer(kind=4), optional :: nmaxhwm=0
             real(kind=8), allocatable,dimension(:,:) :: swbar
         end module hwm
+        hwm14range(iyd, sec, altlim, numalts, latlim, numlats, lonlim, numlons, stl, f107a, f107, ap, wind)
+            use hwm
+            integer(4), intent(in)  :: iyd
+            integer(4), intent(in)  :: numalts, numlats, numlons
+            real(4), intent(in)     :: sec,stl,f107a,f107
+            real(4), intent(in)     :: altlim(2), latlim(2), lonlim(2)
+            real(4), intent(in)     :: ap(2)
+            real(4), intent(out)    :: wind(1:2,1:numlons,1:numlats,1:numalts)
+        end subroutine hwm14range
         subroutine hwm14(iyd,sec,alt,glat,glon,stl,f107a,f107,ap,w) ! in :hwm14:hwm14.f90
             use hwm
             integer(kind=4) intent(in) :: iyd
