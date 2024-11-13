@@ -6,7 +6,7 @@
 =======
 pyHWM14
 =======
-Python interface for the Horizontal Wind Model version 2014 (HWM14)
+Python interface for the Horizontal Wind Model version 2014 (HWM14). This fork was extended by a Fortran function to call the HWM14 model for a range of values through `pyhwm2014.hwm14.hwm14range`. Thus much faster generation of 3D data is possible through the backendm rather than loops in Python. Naturally, the fork needs building and installation from the source.
 
 .. contents::
 
