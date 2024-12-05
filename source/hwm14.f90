@@ -83,7 +83,7 @@ subroutine hwm14range(iyd, sec, altlim, numalts, latlim, numlats, lonlim, numlon
         alt = altlim(1) + dalt * (nalt - 1)
         do nlat = 1, numlats
             glat = latlim(1) + dlat * (nlat - 1)
-            do nlon = 0, numlons
+            do nlon = 1, numlons
                 glon = lonlim(1) + dlon * (nlon - 1)
 
                 call hwm14(iyd,sec,alt,glat,glon,stl,f107a,f107,ap,wind(1:2,nlon,nlat,nalt))
